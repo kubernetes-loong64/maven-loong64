@@ -1,0 +1,39 @@
+ARG JDK_VERSION
+
+FROM kubernetesloong64/jdk-loong64:${JDK_VERSION}-anolis
+
+ARG MAVEN_VERSION=3.9.16
+
+ENV MAVEN_VERSION=${MAVEN_VERSION}
+ENV MAVEN_URL="https://repo1.maven.org/maven2/org/apache/maven/apache-maven/${MAVEN_VERSION}/apache-maven-${MAVEN_VERSION}-bin.zip"
+ENV MAVEN_SHA512_URL="${MAVEN_URL}.sha512"
+
+LABEL maintainer="徐晓伟 <xuxiaowei@xuxiaowei.com.cn>" \
+      license="Apache-2.0" \
+      org.opencontainers.image.authors="徐晓伟 <xuxiaowei@xuxiaowei.com.cn>" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.title="LoongArch Maven" \
+      org.opencontainers.image.description="Apache Maven ${MAVEN_VERSION} for LoongArch (loong64)" \
+      org.opencontainers.image.version="${MAVEN_VERSION}" \
+      org.opencontainers.image.url="https://github.com/kubernetes-loong64/maven-loong64" \
+      org.opencontainers.image.source="https://github.com/kubernetes-loong64/maven-loong64"
+
+RUN dnf install -y curl unzip && dnf clean all \
+    && mkdir -p /opt/maven \
+    && curl -fsSL "${MAVEN_URL}" -o /tmp/maven.zip \
+    && curl -fsSL "${MAVEN_SHA512_URL}" -o /tmp/maven.zip.sha512 \
+    && EXPECTED_SHA512=$(awk '{print $1}' /tmp/maven.zip.sha512) \
+    && ACTUAL_SHA512=$(sha512sum /tmp/maven.zip | awk '{print $1}') \
+    && if [ "$EXPECTED_SHA512" != "$ACTUAL_SHA512" ]; then \
+         echo "SHA512 mismatch: expected $EXPECTED_SHA512, got $ACTUAL_SHA512"; exit 1; \
+       fi \
+    && echo "SHA512 verified: $ACTUAL_SHA512" \
+    && unzip -q /tmp/maven.zip -d /tmp \
+    && mv /tmp/apache-maven-${MAVEN_VERSION}/* /opt/maven/ \
+    && rm -rf /tmp/maven.zip /tmp/maven.zip.sha512 /tmp/apache-maven-${MAVEN_VERSION} \
+    && MAVEN_HOME=/opt/maven PATH=/opt/maven/bin:$PATH \
+    mvn --version
+
+ENV MAVEN_HOME=/opt/maven
+ENV M2_HOME=$MAVEN_HOME
+ENV PATH=${MAVEN_HOME}/bin:${PATH}
