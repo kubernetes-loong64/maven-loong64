@@ -18,7 +18,7 @@ LABEL maintainer="徐晓伟 <xuxiaowei@xuxiaowei.com.cn>" \
       org.opencontainers.image.url="https://github.com/kubernetes-loong64/maven-loong64" \
       org.opencontainers.image.source="https://github.com/kubernetes-loong64/maven-loong64"
 
-RUN dnf install -y curl unzip && dnf clean all \
+RUN dnf install -y unzip \
     && mkdir -p /opt/maven \
     && curl -fsSL "${MAVEN_URL}" -o /tmp/maven.zip \
     && curl -fsSL "${MAVEN_SHA512_URL}" -o /tmp/maven.zip.sha512 \
@@ -32,7 +32,10 @@ RUN dnf install -y curl unzip && dnf clean all \
     && mv /tmp/apache-maven-${MAVEN_VERSION}/* /opt/maven/ \
     && rm -rf /tmp/maven.zip /tmp/maven.zip.sha512 /tmp/apache-maven-${MAVEN_VERSION} \
     && MAVEN_HOME=/opt/maven PATH=/opt/maven/bin:$PATH \
-    mvn --version
+    && dnf remove -y unzip \
+    && dnf clean all \
+    && rm -rf /var/cache/dnf \
+    && mvn --version
 
 ENV MAVEN_HOME=/opt/maven
 ENV M2_HOME=$MAVEN_HOME

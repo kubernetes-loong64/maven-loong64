@@ -19,7 +19,6 @@ LABEL maintainer="徐晓伟 <xuxiaowei@xuxiaowei.com.cn>" \
       org.opencontainers.image.source="https://github.com/kubernetes-loong64/maven-loong64"
 
 RUN apt-get update && apt-get install -y --no-install-recommends curl unzip ca-certificates \
-    && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /opt/maven \
     && curl -fsSL "${MAVEN_URL}" -o /tmp/maven.zip \
     && curl -fsSL "${MAVEN_SHA512_URL}" -o /tmp/maven.zip.sha512 \
@@ -33,7 +32,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl unzip ca-c
     && mv /tmp/apache-maven-${MAVEN_VERSION}/* /opt/maven/ \
     && rm -rf /tmp/maven.zip /tmp/maven.zip.sha512 /tmp/apache-maven-${MAVEN_VERSION} \
     && MAVEN_HOME=/opt/maven PATH=/opt/maven/bin:$PATH \
-    mvn --version
+    && apt-get purge -y curl unzip \
+    && rm -rf /var/lib/apt/lists/* \
+    && mvn --version
 
 ENV MAVEN_HOME=/opt/maven
 ENV M2_HOME=$MAVEN_HOME
