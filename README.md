@@ -211,6 +211,28 @@ docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn --vers
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-openeuler mvn --version
 ```
 
+### Working Directory
+
+The default working directory inside the container is `/workspace`. You can mount your project directly without switching directories:
+
+```shell
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
+```
+
+```shell
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
+```
+
 ### Multi-stage Build
 
 This image is designed to be used as a stage in multi-stage Docker builds. Combine it with your build stage to compile Java projects on LoongArch:

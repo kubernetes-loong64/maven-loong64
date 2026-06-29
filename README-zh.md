@@ -211,6 +211,28 @@ docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn --vers
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-openeuler mvn --version
 ```
 
+### 工作目录
+
+容器内默认工作目录为 `/workspace`。可以直接挂载项目目录，无需手动切换：
+
+```shell
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
+```
+
+```shell
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
+```
+
 ### 多阶段构建
 
 此镜像可用于多阶段 Docker 构建。将其与构建阶段结合，在 LoongArch 上编译 Java 项目：
