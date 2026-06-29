@@ -64,6 +64,39 @@ Prebuilt Apache Maven Docker images for the LoongArch (loong64) architecture, bu
 
 Images are published to Docker Hub under [`kubernetesloong64/maven-loong64`](https://hub.docker.com/r/kubernetesloong64/maven-loong64).
 
+A Chinese mirror is also available at `registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64`. Pull from the mirror by replacing the registry:
+
+```shell
+# Example: pull from the Chinese mirror
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-anolis
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-anolis
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-anolis
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-anolis
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-anolis
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-anolis
+
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-debian
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-debian
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-debian
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-debian
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-debian
+
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-debian-slim
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-debian-slim
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-debian-slim
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-debian-slim
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-debian-slim
+
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-openeuler
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-openeuler
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-openeuler
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-openeuler
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-openeuler
+docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-openeuler
+```
+
 ```shell
 # JDK 8 (anolis)
 docker pull kubernetesloong64/maven-loong64:3.9.16-8-anolis

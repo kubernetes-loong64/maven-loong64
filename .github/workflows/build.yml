@@ -58,10 +58,23 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Login to sync container registry
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+        if: github.event_name == 'push' && vars.SYNC_REGISTRY != ''
+        with:
+          registry: ${{ vars.SYNC_REGISTRY }}
+          username: ${{ vars.SYNC_REGISTRY_USERNAME }}
+          password: ${{ secrets.SYNC_REGISTRY_PASSWORD }}
+
       - name: Build image
         run: |
           PREFIX="${{ env.NAMESPACE }}/maven-loong64"
           TAG="${PREFIX}:${{ matrix.maven.version }}-${{ matrix.jdk.version }}-${{ matrix.base.os }}"
+          SYNC_PREFIX=${PREFIX}
+          if [ -n "${{ vars.SYNC_REGISTRY }}" ]; then
+            SYNC_PREFIX=${{ vars.SYNC_REGISTRY }}/${PREFIX}
+          fi
+          SYNC_TAG="${SYNC_PREFIX}:${{ matrix.maven.version }}-${{ matrix.jdk.version }}-${{ matrix.base.os }}"
           is_push=${{ github.event_name == 'push' && '--push' || '--load' }}
           echo "==> Building ${TAG}"
           docker buildx build \
@@ -73,5 +86,6 @@ jobs:
             --build-arg "OS=${{ matrix.base.os }}" \
             --platform linux/loong64 \
             -t "${TAG}" \
+            -t "${SYNC_TAG}" \
             docker/
           echo "==> Done: ${TAG}"
