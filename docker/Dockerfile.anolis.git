@@ -1,0 +1,10 @@
+ARG JDK_VERSION
+ARG GIT_VERSION
+ARG MAVEN_VERSION=3.9.16
+ARG OS=anolis
+
+FROM kubernetesloong64/maven-loong64:${MAVEN_VERSION}-${JDK_VERSION}-${OS}
+
+COPY --from=kubernetesloong64/git-loong64:${GIT_VERSION}-${OS} /usr/local /usr/local
+
+RUN git --version
