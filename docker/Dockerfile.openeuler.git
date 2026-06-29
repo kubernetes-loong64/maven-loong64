@@ -3,8 +3,9 @@ ARG GIT_VERSION
 ARG MAVEN_VERSION=3.9.16
 ARG OS=openeuler
 
+FROM kubernetesloong64/git-loong64:${GIT_VERSION}-${OS} AS git-stage
 FROM kubernetesloong64/maven-loong64:${MAVEN_VERSION}-${JDK_VERSION}-${OS}
 
-COPY --from=kubernetesloong64/git-loong64:${GIT_VERSION}-${OS} /usr/local /usr/local
+COPY --from=git-stage /usr/local /usr/local
 
 RUN git --version
