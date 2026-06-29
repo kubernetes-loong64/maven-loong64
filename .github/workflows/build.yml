@@ -29,6 +29,8 @@ jobs:
             dockerfile: Dockerfile.debian
           - os: debian-slim
             dockerfile: Dockerfile.debian
+          - os: openeuler
+            dockerfile: Dockerfile.openeuler
         jdk:
           - version: "8"
           - version: "11"
