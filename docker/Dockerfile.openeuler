@@ -18,7 +18,7 @@ LABEL maintainer="徐晓伟 <xuxiaowei@xuxiaowei.com.cn>" \
       org.opencontainers.image.url="https://github.com/kubernetes-loong64/maven-loong64" \
       org.opencontainers.image.source="https://github.com/kubernetes-loong64/maven-loong64"
 
-RUN dnf --nometalink install -y unzip \
+RUN dnf install -y unzip \
     && mkdir -p /opt/maven \
     && curl -fsSL "${MAVEN_URL}" -o /tmp/maven.zip \
     && curl -fsSL "${MAVEN_SHA512_URL}" -o /tmp/maven.zip.sha512 \
