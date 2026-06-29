@@ -99,7 +99,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        git_version: [ "2.54.0" ]
+        git_version: [ "v2.54.0" ]
         base:
           - os: anolis
             dockerfile: Dockerfile.anolis.git
