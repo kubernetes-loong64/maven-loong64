@@ -18,8 +18,7 @@ LABEL maintainer="徐晓伟 <xuxiaowei@xuxiaowei.com.cn>" \
       org.opencontainers.image.url="https://github.com/kubernetes-loong64/maven-loong64" \
       org.opencontainers.image.source="https://github.com/kubernetes-loong64/maven-loong64"
 
-RUN sed -i 's/^metalink=/#metalink=/g' /etc/yum.repos.d/*.repo \
-    && dnf install -y unzip \
+RUN dnf --nometalink install -y unzip \
     && mkdir -p /opt/maven \
     && curl -fsSL "${MAVEN_URL}" -o /tmp/maven.zip \
     && curl -fsSL "${MAVEN_SHA512_URL}" -o /tmp/maven.zip.sha512 \
@@ -34,7 +33,6 @@ RUN sed -i 's/^metalink=/#metalink=/g' /etc/yum.repos.d/*.repo \
     && rm -rf /tmp/maven.zip /tmp/maven.zip.sha512 /tmp/apache-maven-${MAVEN_VERSION} \
     && MAVEN_HOME=/opt/maven PATH=/opt/maven/bin:$PATH \
     && dnf remove -y unzip \
-    && sed -i 's/^#metalink=/metalink=/g' /etc/yum.repos.d/*.repo \
     && dnf clean all \
     && rm -rf /var/cache/dnf \
     && mvn --version
