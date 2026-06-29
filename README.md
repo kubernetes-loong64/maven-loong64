@@ -213,25 +213,20 @@ docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-openeuler mvn --versio
 
 ### Working Directory
 
-The default working directory inside the container is `/workspace`. You can mount your project directly without switching directories:
+The default working directory inside the container is `/workspace`. Mount your project directory to build without switching directories:
 
 ```shell
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
+# Docker Hub
 docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
+
+# Chinese mirror (uses $HOME instead of ~ for better compatibility)
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
 ```
 
-```shell
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
-```
+> **Tip:**
+> - `-v ~/.m2:~/.m2` (or `-v $HOME/.m2:$HOME/.m2`) caches the Maven local repository to avoid re-downloading dependencies.
+> - To use a custom `settings.xml`, place it in your project directory and add `-s settings.xml`.
+> - You can also set `MAVEN_OPTS=-Dmaven.repo.local=/opt/apache-maven-repo` to specify a custom local repository path, which takes precedence over `settings.xml`.
 
 ### Multi-stage Build
 

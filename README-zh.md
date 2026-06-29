@@ -2,7 +2,8 @@
 
 <p align="center"><a href="README.md">English</a> | <a href="README-zh.md">中文</a></p>
 
-为 LoongArch（loong64）架构预构建的 Apache Maven Docker 镜像，基于 [jdk-loong64](https://github.com/kubernetes-loong64/jdk-loong64) 构建。
+为 LoongArch（loong64）架构预构建的 Apache Maven Docker
+镜像，基于 [jdk-loong64](https://github.com/kubernetes-loong64/jdk-loong64) 构建。
 
 ## 基于 AnolisOS 龙蜥系统
 
@@ -213,25 +214,20 @@ docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-openeuler mvn --versio
 
 ### 工作目录
 
-容器内默认工作目录为 `/workspace`。可以直接挂载项目目录，无需手动切换：
+容器内默认工作目录为 `/workspace`。直接挂载项目目录即可构建，无需手动切换目录：
 
 ```shell
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
+# Docker Hub
 docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v ~/.m2:~/.m2 kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
+
+# 国内镜像（使用 $HOME 替代 ~，兼容性更好）
+docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
 ```
 
-```shell
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn -V -B clean package
-docker run --rm -v $(pwd):/workspace -v $HOME/.m2:$HOME/.m2 registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn -V -B clean package
-```
+> **提示：**
+> - `-v ~/.m2:~/.m2`（或 `-v $HOME/.m2:$HOME/.m2`）缓存 Maven 本地仓库，避免重复下载依赖。
+> - 如需自定义 `settings.xml`，将其放在项目目录，添加 `-s settings.xml` 即可。
+> - 也可通过环境变量 `MAVEN_OPTS=-Dmaven.repo.local=/opt/apache-maven-repo` 指定本地仓库路径，优先级高于 `settings.xml`。
 
 ### 多阶段构建
 
