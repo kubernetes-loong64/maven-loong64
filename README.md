@@ -31,15 +31,6 @@ Prebuilt Apache Maven Docker images for the LoongArch (loong64) architecture, bu
 - [![kubernetesloong64/maven-loong64:3.9.16-25-debian-slim](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-25-debian-slim?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
 - [![kubernetesloong64/maven-loong64:3.9.16-26-debian-slim](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-26-debian-slim?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
 
-## openEuler-based
-
-- [![kubernetesloong64/maven-loong64:3.9.16-8-openeuler](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-8-openeuler?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
-- [![kubernetesloong64/maven-loong64:3.9.16-11-openeuler](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-11-openeuler?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
-- [![kubernetesloong64/maven-loong64:3.9.16-17-openeuler](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-17-openeuler?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
-- [![kubernetesloong64/maven-loong64:3.9.16-21-openeuler](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-21-openeuler?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
-- [![kubernetesloong64/maven-loong64:3.9.16-25-openeuler](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-25-openeuler?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
-- [![kubernetesloong64/maven-loong64:3.9.16-26-openeuler](https://img.shields.io/docker/v/kubernetesloong64/maven-loong64/3.9.16-26-openeuler?arch=loong64&logo=docker&label=kubernetesloong64%2Fmaven-loong64)](https://hub.docker.com/r/kubernetesloong64/maven-loong64/tags)
-
 ### Supported JDK Versions
 
 | JDK | Supported |
@@ -53,12 +44,11 @@ Prebuilt Apache Maven Docker images for the LoongArch (loong64) architecture, bu
 
 ### Supported Base Images
 
-| OS          | Base Image                        |
-|-------------|-----------------------------------|
-| anolis      | openanolis/anolisos:23.4          |
-| debian      | lcr.loongnix.cn/debian:14         |
-| debian-slim | lcr.loongnix.cn/debian:14-slim    |
-| openeuler   | openeuler/openeuler:24.03-lts-sp3 |
+| OS          | Base Image                     |
+|-------------|--------------------------------|
+| anolis      | openanolis/anolisos:23.4       |
+| debian      | lcr.loongnix.cn/debian:14      |
+| debian-slim | lcr.loongnix.cn/debian:14-slim |
 
 ### Pull Images
 
@@ -88,13 +78,6 @@ docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9
 docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-debian-slim
 docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-debian-slim
 docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-debian-slim
-
-docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-8-openeuler
-docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-11-openeuler
-docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-17-openeuler
-docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-21-openeuler
-docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-25-openeuler
-docker pull registry.cn-qingdao.aliyuncs.com/kubernetesloong64/maven-loong64:3.9.16-26-openeuler
 ```
 
 ```shell
@@ -151,24 +134,6 @@ docker pull kubernetesloong64/maven-loong64:3.9.16-25-debian-slim
 
 # JDK 26 (debian-slim)
 docker pull kubernetesloong64/maven-loong64:3.9.16-26-debian-slim
-
-# JDK 8 (openeuler)
-docker pull kubernetesloong64/maven-loong64:3.9.16-8-openeuler
-
-# JDK 11 (openeuler)
-docker pull kubernetesloong64/maven-loong64:3.9.16-11-openeuler
-
-# JDK 17 (openeuler)
-docker pull kubernetesloong64/maven-loong64:3.9.16-17-openeuler
-
-# JDK 21 (openeuler)
-docker pull kubernetesloong64/maven-loong64:3.9.16-21-openeuler
-
-# JDK 25 (openeuler)
-docker pull kubernetesloong64/maven-loong64:3.9.16-25-openeuler
-
-# JDK 26 (openeuler)
-docker pull kubernetesloong64/maven-loong64:3.9.16-26-openeuler
 ```
 
 ### Usage
@@ -178,37 +143,31 @@ docker pull kubernetesloong64/maven-loong64:3.9.16-26-openeuler
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-8-anolis mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-8-debian mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-8-debian-slim mvn --version
-docker run --rm kubernetesloong64/maven-loong64:3.9.16-8-openeuler mvn --version
 
 # JDK 11
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-11-anolis mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-11-debian mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-11-debian-slim mvn --version
-docker run --rm kubernetesloong64/maven-loong64:3.9.16-11-openeuler mvn --version
 
 # JDK 17
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-17-anolis mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-17-debian mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-17-debian-slim mvn --version
-docker run --rm kubernetesloong64/maven-loong64:3.9.16-17-openeuler mvn --version
 
 # JDK 21
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-21-anolis mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-21-debian mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-21-debian-slim mvn --version
-docker run --rm kubernetesloong64/maven-loong64:3.9.16-21-openeuler mvn --version
 
 # JDK 25
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-25-anolis mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-25-debian mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-25-debian-slim mvn --version
-docker run --rm kubernetesloong64/maven-loong64:3.9.16-25-openeuler mvn --version
 
 # JDK 26
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-anolis mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-debian mvn --version
 docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-debian-slim mvn --version
-docker run --rm kubernetesloong64/maven-loong64:3.9.16-26-openeuler mvn --version
 ```
 
 ### Working Directory
